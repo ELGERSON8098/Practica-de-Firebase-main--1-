@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { StyleSheet, SafeAreaView, View, Image, Text, TouchableOpacity, TextInput, Alert, } from 'react-native';
+import { StyleSheet, SafeAreaView, View, Image, Text, TouchableOpacity, TextInput, Alert } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from '../config/firebase-config';
 
-export default function SingUp({ navigation }) {
+export default function SignUp({ navigation }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -14,178 +14,136 @@ export default function SingUp({ navigation }) {
 
   const goToLogIn = () => {
     navigation.navigate('LogIn');
-  }
+  };
 
   const handleCreateAccount = () => {
+    if (!email || !password) {
+      Alert.alert('Error', 'Por favor, completa todos los campos.');
+      return;
+    }
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         console.log('¡Cuenta creada!');
         const user = userCredential.user;
-        Alert.alert('Exito', 'Se creo el usuario con exito.');
+        Alert.alert('Éxito', 'Se creó el usuario con éxito.');
         goToLogIn();
         console.log(user);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
         Alert.alert('Error', 'No se pudo crear la cuenta. Por favor, inténtalo de nuevo.');
       });
-  }
+  };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#e8ecf4' }}>
-      <View style={styles.container}>
-        <KeyboardAwareScrollView>
-          <View style={styles.header}>
-            <Image
-              alt="App Logo"
-              resizeMode="contain"
-              style={styles.headerImg}
-              source={{
-                uri: 'https://cdn-icons-png.flaticon.com/512/138/138659.png',
-              }}
-            />
-            <Text style={styles.title}>
-              Regístro <Text style={{ color: '#075eec' }}></Text>
-            </Text>
-            <Text style={styles.subtitle}>
-              Acontinuación ingrese los datos solicitados
-            </Text>
-          </View>
-          <View style={styles.form}>
-            <View style={styles.input}>
-              <Text style={styles.inputLabel}>Correo electrónico</Text>
-              <TextInput
-                autoCapitalize="none"
-                autoCorrect={false}
-                clearButtonMode="while-editing"
-                keyboardType="email-address"
-                onChangeText={text => setEmail(text)}
-                placeholder="juan@ejemplo.com"
-                placeholderTextColor="#6b7280"
-                style={styles.inputControl}
-              />
-            </View>
-            <View style={styles.input}>
-              <Text style={styles.inputLabel}>Contraseña</Text>
-              <TextInput
-                autoCorrect={false}
-                clearButtonMode="while-editing"
-                onChangeText={text => setPassword(text)}
-                placeholder="********"
-                placeholderTextColor="#6b7280"
-                style={styles.inputControl}
-                secureTextEntry={true}
-              />
-            </View>
-            <View style={styles.formAction}>
-              <TouchableOpacity>
-                <View style={styles.btn}>
-                  <Text onPress={handleCreateAccount} style={styles.btnText}>Registrarse</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            <Text style={styles.formLink} onPress={goToLogIn}>¿Ya tienes una cuenta?{' '}
-              <Text style={{ textDecorationLine: 'underline' }}>Inicia sesión</Text>
-            </Text>
-          </View>
-        </KeyboardAwareScrollView>
-      </View>
+    <SafeAreaView style={styles.safeArea}>
+      <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.header}>
+          <Image 
+            source={{ uri: 'https://cdn-icons-png.flaticon.com/512/138/138659.png' }} 
+            style={styles.logo} 
+          />
+          <Text style={styles.title}>Crear Cuenta</Text>
+          <Text style={styles.subtitle}>Completa los datos para registrarte</Text>
+        </View>
+        <View style={styles.form}>
+          <TextInput
+            style={styles.input}
+            placeholder="Correo electrónico"
+            placeholderTextColor="#aaa"
+            autoCapitalize="none"
+            keyboardType="email-address"
+            onChangeText={setEmail}
+            value={email}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Contraseña"
+            placeholderTextColor="#aaa"
+            secureTextEntry
+            onChangeText={setPassword}
+            value={password}
+          />
+          <TouchableOpacity style={styles.button} onPress={handleCreateAccount}>
+            <Text style={styles.buttonText}>Registrarse</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.footer}>
+          <Text style={styles.footerText}>
+            ¿Ya tienes una cuenta?{' '}
+            <Text style={styles.logInLink} onPress={goToLogIn}>Inicia sesión</Text>
+          </Text>
+        </View>
+      </KeyboardAwareScrollView>
     </SafeAreaView>
   );
 }
- 
+
 const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 24,
-    paddingHorizontal: 0,
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#f0f0f0',
+  },
+  scrollContainer: {
     flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 0,
-  },
-  title: {
-    fontSize: 31,
-    fontWeight: '700',
-    color: '#1D2A32',
-    marginBottom: 6,
-  },
-  subtitle: {
-    fontSize: 15,
-    fontWeight: '500',
-    color: '#929292',
+    justifyContent: 'center',
+    padding: 20,
   },
   header: {
     alignItems: 'center',
-    justifyContent: 'center',
-    marginVertical: 36,
+    marginBottom: 40,
   },
-  headerImg: {
-    borderRadius: 30,
-    width: 140,
-    height: 140,
-    alignSelf: 'center',
-    marginBottom: 36,
+  logo: {
+    width: 120,
+    height: 120,
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: '700',
+    color: '#333',
+  },
+  subtitle: {
+    fontSize: 16,
+    color: '#666',
+    marginTop: 5,
   },
   form: {
-    marginBottom: 24,
-    paddingHorizontal: 24,
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 0,
-  },
-  formAction: {
-    marginTop: 4,
-    marginBottom: 16,
-  },
-  formLink: {
-    marginTop: 20,
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#000000',
-    textAlign: 'center',
-  },
-  formFooter: {
-    fontSize: 15,
-    fontWeight: '600',
-    color: '#222',
-    textAlign: 'center',
-    letterSpacing: 0.15,
+    marginBottom: 20,
   },
   input: {
-    marginBottom: 16,
-  },
-  inputLabel: {
-    fontSize: 17,
-    fontWeight: '600',
-    color: '#222',
-    marginBottom: 8,
-  },
-  inputControl: {
     height: 50,
     backgroundColor: '#fff',
-    paddingHorizontal: 16,
-    borderRadius: 12,
-    fontSize: 15,
-    fontWeight: '500',
-    color: '#222',
+    borderRadius: 25,
+    paddingHorizontal: 20,
+    fontSize: 16,
+    marginBottom: 15,
+    borderColor: '#ddd',
     borderWidth: 1,
-    borderColor: '#C9D3DB',
-    borderStyle: 'solid',
   },
-  btn: {
-    flexDirection: 'row',
+  button: {
+    backgroundColor: '#075eec',
+    borderRadius: 25,
+    paddingVertical: 15,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 30,
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderWidth: 1,
-    backgroundColor: '#075eec',
-    borderColor: '#075eec',
+    marginBottom: 10,
   },
-  btnText: {
-    fontSize: 18,
-    lineHeight: 26,
-    fontWeight: '600',
+  buttonText: {
     color: '#fff',
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  footer: {
+    alignItems: 'center',
+  },
+  footerText: {
+    fontSize: 16,
+    color: '#666',
+  },
+  logInLink: {
+    color: '#075eec',
+    textDecorationLine: 'underline',
   },
 });
