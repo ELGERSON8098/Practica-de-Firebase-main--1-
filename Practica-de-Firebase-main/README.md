@@ -3,7 +3,7 @@
 
  ## INTEGRANTES DEL EQUIPO 
 
- - Francisco Javier Guadron Vazques (#20220332)
- - Jeremy Leandro Castro Moreno (#20220638)
+ - Gerson Alexander Echeverría Hernández (#20220175)
+ - Juan Pablo Flamenco Pineda (#20220671)
 
-Creaccion de proyecto utilizando reac native junto Expo, ademas de ocupar firebase para lo que es el registro de datos
+Creaccion de proyecto utilizando firebase para el registro de datos
