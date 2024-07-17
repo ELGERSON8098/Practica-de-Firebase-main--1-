@@ -1,4 +1,3 @@
-// Importación de bibliotecas y componentes necesarios
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatList } from 'react-native';
 import { database } from '../config/firebase'; // Importa la configuración de la base de datos de Firebase
@@ -61,19 +60,18 @@ const Home = ({ navigation }) => {
                     contentContainerStyle={styles.list}
                 />
                 : 
-                <Text style={styles.Subtitle}>No hay productos disponibles</Text>
+                <Text style={styles.subtitle}>No hay productos disponibles</Text>
             }
 
             {/* Botón para navegar a la pantalla de agregar productos */}
             <TouchableOpacity
-                style={styles.Button}
+                style={styles.button}
                 onPress={goToAdd}>
-                <Text style={styles.ButtonText}>Agregar Producto</Text>
+                <Text style={styles.buttonText}>Agregar Producto</Text>
             </TouchableOpacity>
         </View>
     );
 };
-
 
 // Exporta el componente Home como predeterminado
 export default Home;
@@ -82,32 +80,33 @@ export default Home;
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#FEFEFE',
+        backgroundColor: '#1a1a1a',
         justifyContent: 'center',
         padding: 20,
     },
     title: {
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: 'bold',
         textAlign: 'center',
+        color: '#ff6347',
         marginBottom: 20,
     },
-    Subtitle: {
+    subtitle: {
         fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center',
         marginBottom: 10,
-        color:'#ff9800'
+        color: '#ff9800',
     },
-    Button: {
-        backgroundColor: '#0288d1',
-        padding: 10,
+    button: {
+        backgroundColor: '#ff6347',
+        padding: 15,
         borderRadius: 5,
         marginTop: 20,
         marginHorizontal: 50,
-        paddingVertical: 20,
+        paddingVertical: 15,
     },
-    ButtonText: {
+    buttonText: {
         color: 'white',
         fontWeight: 'bold',
         textAlign: 'center',

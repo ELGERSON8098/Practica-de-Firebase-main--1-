@@ -5,9 +5,7 @@ import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc } from 'firebase/firestore';
 import * as ImagePicker from 'expo-image-picker';
 
-// Componente Add para agregar un nuevo producto
 const Add = ({ navigation }) => {
-    // Estado inicial del producto
     const [producto, setProducto] = useState({
         nombre: '',
         precio: 0,
@@ -16,12 +14,10 @@ const Add = ({ navigation }) => {
         imagen: ''
     });
 
-    // Función para navegar a la pantalla de inicio
     const goToHome = () => {
         navigation.navigate('Home');
     };
 
-    // Función para abrir la galería de imágenes del dispositivo
     const openGalery = async () => {
         try {
             let result = await ImagePicker.launchImageLibraryAsync({
@@ -43,7 +39,6 @@ const Add = ({ navigation }) => {
         }
     };
 
-    // Función para agregar el producto a Firestore
     const agregarProducto = async () => {
         try {
             let imageUrl = null;
@@ -98,7 +93,7 @@ const Add = ({ navigation }) => {
                     keyboardType='numeric'
                 />
             </View>
-            <Text>Imagen:</Text>
+            <Text style={styles.label}>Imagen:</Text>
             <TouchableOpacity onPress={openGalery} style={styles.imagePicker}>
                 <Text style={styles.imagePickerText}>Seleccionar Imagen</Text>
             </TouchableOpacity>
@@ -117,28 +112,29 @@ const Add = ({ navigation }) => {
 
 export default Add;
 
-// Estilos del componente
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: '#1a1a1a',
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20,
     },
     title: {
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: 'bold',
         marginBottom: 20,
         textAlign: 'center',
+        color: '#ff6347',
     },
     input: {
         height: 40,
-        borderColor: '#ccc',
+        borderColor: '#444',
         borderWidth: 1,
         borderRadius: 4,
         paddingLeft: 8,
-        backgroundColor: '#fff',
+        backgroundColor: '#333',
+        color: '#fff',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
@@ -147,7 +143,7 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     imagePicker: {
-        backgroundColor: '#0288d1',
+        backgroundColor: '#ff6347',
         padding: 10,
         borderRadius: 5,
         alignItems: 'center',
@@ -164,7 +160,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     button: {
-        backgroundColor: '#0288d1',
+        backgroundColor: '#ff6347',
         padding: 10,
         borderRadius: 5,
         marginTop: 20,
@@ -179,12 +175,13 @@ const styles = StyleSheet.create({
     label: {
         fontSize: 16,
         marginBottom: 8,
-        color: '#333',
+        color: '#ff6347',
     },
     inputContainer: {
         width: '100%',
         padding: 16,
-        backgroundColor: '#f8f9fa',
+        backgroundColor: '#2a2a2a',
         marginBottom: 16,
+        borderRadius: 4,
     },
 });

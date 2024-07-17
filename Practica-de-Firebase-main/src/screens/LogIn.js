@@ -41,14 +41,14 @@ export default function LogIn({ navigation }) {
       <KeyboardAwareScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.header}>
           <Image source={AppLogo} style={styles.logo} />
-          <Text style={styles.title}>Bienvenido a <Text style={styles.brand}>SIUUUU</Text></Text>
-          <Text style={styles.subtitle}>Inicia sesión para continuar</Text>
+          <Text style={styles.title}>Bienvenido a la <Text style={styles.brand}>apk de Geron y JP</Text></Text>
+          <Text style={styles.subtitle}>Inicia sesión</Text>
         </View>
         <View style={styles.form}>
           <TextInput
             style={styles.input}
             placeholder="Correo electrónico"
-            placeholderTextColor="#aaa"
+            placeholderTextColor="#bbb"
             autoCapitalize="none"
             keyboardType="email-address"
             onChangeText={setEmail}
@@ -57,7 +57,7 @@ export default function LogIn({ navigation }) {
           <TextInput
             style={styles.input}
             placeholder="Contraseña"
-            placeholderTextColor="#aaa"
+            placeholderTextColor="#bbb"
             secureTextEntry
             onChangeText={setPassword}
             value={password}
@@ -68,8 +68,8 @@ export default function LogIn({ navigation }) {
         </View>
         <View style={styles.footer}>
           <Text style={styles.footerText}>
-            ¿No tienes una cuenta? Registro{' '}
-            <Text style={styles.signUpLink} onPress={goToSignUp}>Regístrate</Text>
+            ¿No tienes una cuenta?{' '}
+            <Text style={styles.signUpLink} onPress={goToSignUp}>Regístrate aquí!</Text>
           </Text>
         </View>
       </KeyboardAwareScrollView>
@@ -80,7 +80,7 @@ export default function LogIn({ navigation }) {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#1a1a1a',
   },
   scrollContainer: {
     flexGrow: 1,
@@ -89,54 +89,52 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 30,
   },
   logo: {
-    width: 120,
-    height: 120,
+    width: 100,
+    height: 100,
     marginBottom: 20,
   },
   title: {
-    fontSize: 24,
-    fontWeight: '700',
-    color: '#333',
-  },
-  brand: {
-    color: '#075eec',
+    fontSize: 28,
+    fontWeight: 'bold',
+    color: '#ff6347',
   },
   subtitle: {
     fontSize: 16,
-    color: '#666',
-    marginTop: 5,
+    color: '#cccccc',
+    marginTop: 10,
   },
   form: {
     marginBottom: 20,
   },
   input: {
-    height: 50,
-    backgroundColor: '#fff',
-    borderRadius: 25,
-    paddingHorizontal: 20,
+    height: 45,
+    backgroundColor: '#333333',
+    borderRadius: 5,
+    paddingHorizontal: 15,
     fontSize: 16,
     marginBottom: 15,
-    borderColor: '#ddd',
+    borderColor: '#444444',
     borderWidth: 1,
+    color: '#ffffff',
   },
   button: {
-    backgroundColor: '#075eec',
-    borderRadius: 25,
+    backgroundColor: '#ff6347',
+    borderRadius: 5,
     paddingVertical: 15,
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 10,
   },
   buttonText: {
-    color: '#fff',
+    color: '#ffffff',
     fontSize: 18,
     fontWeight: '600',
   },
   forgotPassword: {
-    color: '#075eec',
+    color: '#ff6347',
     textAlign: 'center',
     fontSize: 16,
   },
@@ -145,10 +143,10 @@ const styles = StyleSheet.create({
   },
   footerText: {
     fontSize: 16,
-    color: '#666',
+    color: '#cccccc',
   },
   signUpLink: {
-    color: '#075eec',
+    color: '#ff6347',
     textDecorationLine: 'underline',
   },
 });
