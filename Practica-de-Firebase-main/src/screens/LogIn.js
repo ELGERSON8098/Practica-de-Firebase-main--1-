@@ -33,7 +33,7 @@ export default function LogIn({ navigation }) {
   };
 
   const goToSignUp = () => {
-    navigation.navigate('SignUp');
+    navigation.navigate('SingUp');
   };
 
   return (
